@@ -1,6 +1,9 @@
-FROM golang:alpine
+FROM golang:buster
 
-RUN mkdir /app
+RUN echo "deb http://ftp.debian.org/debian buster-backports main contrib" >> /etc/apt/sources.list.d/backports.list && \
+    apt-get update && \
+    apt-get -y install -t buster-backports zfsutils-linux && \
+    mkdir /app 
 ADD . /app
 WORKDIR /app
 RUN go build -o zfs_exporter .
