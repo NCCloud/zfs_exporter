@@ -226,7 +226,7 @@ func getPools(pools []string) ([]*zfs.Zpool, error) {
 	for _, name := range pools {
 		pool, err := zfs.GetZpool(name)
 		if err != nil {
-			log.Warnln("Pool unavailable:", name)
+			log.Warnln("Pool unavailable: %s, %v", name, err)
 			continue
 		}
 		zpools = append(zpools, pool)
